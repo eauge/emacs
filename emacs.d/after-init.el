@@ -1,38 +1,34 @@
+(setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
+			 ("melpa" . "http://melpa.org/packages/")))
 (package-initialize)
 
 (defconst packages
   '(anzu
-    aggressive-indent
-    company
-    company-tern
-    color-theme
-    duplicate-thing
-    ggtags
-    flycheck
-    less-css-mode
-    go-mode
-    helm
-    helm-projectile
-    helm-gtags
-    helm-swoop
-    magit
     clean-aindent-mode
     comment-dwim-2
+    company
+    company-c-headers
     dtrt-indent
-    ws-butler
-    iedit
+    duplicate-thing
+    exec-path-from-shell
+    flycheck
+    ggtags
+    go-mode
+    helm
+    helm-gtags
+    helm-projectile
+    helm-swoop
+    js2-mode
+    magit
+    projectile
     smartparens
     smartscan
-    sml-mode
-    projectile
     undo-tree
-    js2-mode
-    js2-refactor
+    volatile-highlights
     web-mode
-    zygospore
+    ws-butler
+    yasnippet
     ))
-
-(setq auto-save-default nil)
 
 (defun install-packages ()
   "Install all required packages."
@@ -47,21 +43,30 @@
 
 (add-to-list 'load-path "~/.emacs.d/custom")
 
+;; tell emacs to initialize the $PATH env
+;; variable
+(when (memq window-system '(mac ns))
+  (exec-path-from-shell-initialize))
+
+(exec-path-from-shell-copy-env "PATH")
+
+;; setup for emacs defaults
 (require 'setup-defaults)
 (require 'setup-utils)
-(require 'setup-magit)
-(require 'setup-ecb)
-(require 'setup-dtrt)
+
+;; setup additional packages installed
 (require 'setup-company)
-(require 'setup-smartparens)
-(require 'setup-projectile)
+(require 'setup-flycheck)
 (require 'setup-ggtags)
 (require 'setup-helm)
-(require 'setup-helm-gtags)
-(require 'setup-flycheck)
+(require 'setup-js)
+(require 'setup-magit)
 (require 'setup-prog)
+(require 'setup-projectile)
+(require 'setup-undo-tree)
 (require 'setup-web)
-(require 'setup-js2)
-(require 'setup-cpp)
+(require 'setup-ws-butler)
+
+;; setup languages
+(require 'setup-cc)
 (require 'setup-go)
-(require 'setup-python)

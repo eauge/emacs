@@ -1,6 +1,7 @@
 (require 'company)
-
 (add-hook 'after-init-hook 'global-company-mode)
-(global-set-key (kbd "C-c C-n") 'company-complete-common)
+(delete 'company-semantic company-backends)
+
+(add-to-list 'company-backends 'company-c-headers)
 
 (provide 'setup-company)

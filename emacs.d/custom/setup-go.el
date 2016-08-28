@@ -1,6 +1,34 @@
-(setenv "GOPATH" "/Users/stan/Workspace/Golang")
-(setenv "GOROOT" "/usr/local/opt/go/libexec")
-(add-to-list 'load-path "/Users/stan/Workspace/Golang/src/github.com/dougm/goflymake")
+(defconst goflymake "github.com/dougm/goflymake")
+(defconst goimports "golang.org/x/tools/cmd/goimports")
+(defconst gocover "golang.org/x/tools/cmd/cover")
+(defconst gorename "golang.org/x/tools/cmd/gorename")
+(defconst godef "github.com/rogpeppe/godef")
+
+(defconst go-packages
+  '(
+   goflymake
+   goimports
+   gocover
+   gorename
+   godef
+   ))
+
+(exec-path-from-shell-copy-env "GOPATH")
+(defconst GOPATH (getenv "GOPATH"))
+
+(defun install-go-packages ()
+  "Install all required go packages."
+  (interactive)
+  (dolist (package go-packages)
+    (if (not (file-exists-p (concat GOPATH "/src/" (symbol-value package))))
+      (shell-command
+       (concat "go get " (symbol-value package)))
+      )))
+
+(install-go-packages)
+
+(add-to-list 'load-path
+             (concat GOPATH "/src/" goflymake))
 (require 'go-flycheck)
 
 (defun my-go-mode-hook ()
@@ -24,11 +52,6 @@
             (set (make-local-variable 'company-backends) '(company-go))
             (company-mode)))
 
-
-
-(setq exec-path (cons "/Users/stan/Workspace/Golang/bin" exec-path))
-(setq exec-path (cons "/usr/local/go/bin" exec-path))
-(setenv "PATH" "/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/opt/X11/bin:/Users/stan/Workspace/OpenTok/squid/bin:/usr/local/sbin/:/usr/local/opt/go/libexec/bin:/Users/stan/Workspace/Golang/bin")
 (add-hook 'before-save-hook 'gofmt-before-save)
 
 (provide 'setup-go)
