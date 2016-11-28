@@ -5,9 +5,12 @@
 (defconst packages
   '(anzu
     clean-aindent-mode
+    cmake-ide
+    cmake-mode
     comment-dwim-2
     company
     company-c-headers
+    company-go
     dtrt-indent
     duplicate-thing
     exec-path-from-shell
@@ -21,6 +24,7 @@
     js2-mode
     magit
     projectile
+    rtags
     smartparens
     smartscan
     undo-tree

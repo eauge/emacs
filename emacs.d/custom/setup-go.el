@@ -1,6 +1,7 @@
 (defconst goflymake "github.com/dougm/goflymake")
 (defconst goimports "golang.org/x/tools/cmd/goimports")
 (defconst gocover "golang.org/x/tools/cmd/cover")
+(defconst gocode "github.com/nsf/gocode")
 (defconst gorename "golang.org/x/tools/cmd/gorename")
 (defconst godef "github.com/rogpeppe/godef")
 
@@ -11,9 +12,12 @@
    gocover
    gorename
    godef
+   gocode
    ))
 
 (exec-path-from-shell-copy-env "GOPATH")
+(exec-path-from-shell-copy-env "GOROOT")
+
 (defconst GOPATH (getenv "GOPATH"))
 
 (defun install-go-packages ()
