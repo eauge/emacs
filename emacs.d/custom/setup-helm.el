@@ -117,7 +117,7 @@
 (define-key helm-gtags-mode-map (kbd "C-c >") 'helm-gtags-next-history)
 
 ;; HELM Projectile configuration
-(helm-projectile-on)
+;; (helm-projectile-on)
 (setq projectile-completion-system 'helm)
 (setq projectile-indexing-method 'alien)
 (setq projectile-enable-caching t)

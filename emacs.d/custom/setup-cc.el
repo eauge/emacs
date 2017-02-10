@@ -24,6 +24,9 @@
 (add-hook 'c-mode-hook 'alexott/cedet-hook)
 (add-hook 'c++-mode-hook 'alexott/cedet-hook)
 
+;; (require 'rtags)
+;; (cmake-ide-setup)
+
 ;; Enable EDE only in C/C++
 (require 'ede)
 (global-ede-mode)
